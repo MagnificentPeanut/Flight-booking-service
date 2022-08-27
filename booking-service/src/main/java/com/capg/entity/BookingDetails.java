@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -29,6 +28,8 @@ public class BookingDetails {
     private String email;
     private String phoneNo;
     private Integer requiredSeats;
+    private int flightId;
+    private Flights flights;
     @CreatedDate
     private LocalDateTime bookedOn;
     @CreatedDate
@@ -42,6 +43,8 @@ public class BookingDetails {
         this.email = bookingDetailsDTO.getEmail();
         this.phoneNo = bookingDetailsDTO.getPhoneNo();
         this.requiredSeats = bookingDetailsDTO.getRequiredSeats();
+        this.flightId = bookingDetailsDTO.getFlightId();
+        this.flights = bookingDetailsDTO.getFlights();
 
         this.bookedOn = bookingDetailsDTO.getBookedOn();
         this.updatedOn = bookingDetailsDTO.getUpdatedOn();

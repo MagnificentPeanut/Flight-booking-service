@@ -20,6 +20,9 @@ public class BookingServiceImpl implements BookingService{
     @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
 
+    @Autowired
+    private FlightsInfo flightsInfo;
+
     //Get details of all booked flights
     @Override
     public List<BookingDetailsDTO> getBookingDetails() {
@@ -40,6 +43,7 @@ public class BookingServiceImpl implements BookingService{
     public BookingDetailsDTO newBooking(BookingDetailsDTO bookingDetailsDTO) {
         BookingDetails bookingDetails = new BookingDetails(bookingDetailsDTO);
         bookingDetails.setBookingId(sequenceGeneratorService.getSequenceNumber(BookingDetails.SEQUENCE_NAME));
+        bookingDetails.setFlights(flightsInfo.getFlightDetails(bookingDetails.getFlightId()));
         bookingDetails.bookedTime();
         bookingDetails.updatedTime();
         return new BookingDetailsDTO(bookingRepository.save(bookingDetails));
@@ -64,6 +68,8 @@ public class BookingServiceImpl implements BookingService{
             bookingSave.setEmail(bookingDetailsDTO.getEmail() != null ? bookingDetailsDTO.getEmail() : bookingSave.getEmail());
             bookingSave.setPhoneNo(bookingDetailsDTO.getPhoneNo() != null ? bookingDetailsDTO.getPhoneNo() : bookingSave.getPhoneNo());
             bookingSave.setRequiredSeats(bookingDetailsDTO.getRequiredSeats() != null ? bookingDetailsDTO.getRequiredSeats() : bookingSave.getRequiredSeats());
+            bookingSave.setFlightId(bookingSave.getFlightId());
+            bookingSave.setFlights(flightsInfo.getFlightDetails(bookingSave.getFlightId()));
 
             bookingSave.setBookedOn(bookingDetails.getBookedOn());
             bookingSave.updatedTime();

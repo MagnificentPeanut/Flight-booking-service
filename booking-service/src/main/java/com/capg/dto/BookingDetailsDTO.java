@@ -1,6 +1,7 @@
 package com.capg.dto;
 
 import com.capg.entity.BookingDetails;
+import com.capg.entity.Flights;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,8 @@ public class BookingDetailsDTO {
     private String phoneNo;
     @NotNull
     private Integer requiredSeats;
+    private int flightId;
+    private Flights flights;
 
     private LocalDateTime bookedOn;
     private LocalDateTime updatedOn;
@@ -44,6 +47,8 @@ public class BookingDetailsDTO {
         this.email = bookingDetails.getEmail();
         this.phoneNo = bookingDetails.getPhoneNo();
         this.requiredSeats = bookingDetails.getRequiredSeats();
+        this.flightId = bookingDetails.getFlightId();
+        this.flights = bookingDetails.getFlights();
 
         this.bookedOn = bookingDetails.getBookedOn();
         this.updatedOn = bookingDetails.getUpdatedOn();
