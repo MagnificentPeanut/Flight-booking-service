@@ -68,8 +68,9 @@ public class BookingServiceImpl implements BookingService{
             bookingSave.setEmail(bookingDetailsDTO.getEmail() != null ? bookingDetailsDTO.getEmail() : bookingSave.getEmail());
             bookingSave.setPhoneNo(bookingDetailsDTO.getPhoneNo() != null ? bookingDetailsDTO.getPhoneNo() : bookingSave.getPhoneNo());
             bookingSave.setRequiredSeats(bookingDetailsDTO.getRequiredSeats() != null ? bookingDetailsDTO.getRequiredSeats() : bookingSave.getRequiredSeats());
-            bookingSave.setFlightId(bookingSave.getFlightId());
-            bookingSave.setFlights(flightsInfo.getFlightDetails(bookingSave.getFlightId()));
+
+            bookingSave.setFlightId(bookingDetailsDTO.getFlightId() != 0 ? bookingDetailsDTO.getFlightId() : bookingSave.getFlightId());
+            bookingSave.setFlights(bookingDetailsDTO.getFlights() != null ? bookingDetailsDTO.getFlights() : flightsInfo.getFlightDetails(bookingSave.getFlightId()));
 
             bookingSave.setBookedOn(bookingDetails.getBookedOn());
             bookingSave.updatedTime();

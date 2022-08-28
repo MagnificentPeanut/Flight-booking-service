@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,6 +27,7 @@ public class BookingDetailsDTO {
     @NotBlank(message = "Gender cannot be blank or null")
     @Size(min = 3, max = 30)
     private String gender;
+    @Email(message = "Invalid email", regexp = "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")
     @NotBlank(message = "Email cannot be blank or null")
     private String email;
     @NotBlank(message = "Phone number cannot be blank or null")
