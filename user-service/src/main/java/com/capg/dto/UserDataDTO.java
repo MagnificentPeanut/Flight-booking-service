@@ -20,7 +20,6 @@ public class UserDataDTO {
     @NotBlank(message = "Phone number cannot be blank")
     private String phoneNo;
     @NotBlank(message = "Email cannot be blank")
-    @Email(message = "Invalid email", regexp = "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")
     private String email;
     @NotBlank(message = "Password cannot be blank")
     @Size(min = 4, message = "Password should be at least 4 characters")

@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @ComponentScan(basePackages = "com.capg.controller")
 @ComponentScan(basePackages = "com.capg.service")
 @ComponentScan(basePackages = "com.capg.dto")
+@ComponentScan(basePackages = "com.capg.security")
 @EnableMongoRepositories("com.capg.repository")
 @EnableEurekaClient
 public class UserServiceApplication {
