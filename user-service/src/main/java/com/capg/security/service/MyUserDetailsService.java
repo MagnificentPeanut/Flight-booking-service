@@ -21,20 +21,20 @@ public class MyUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         List<SimpleGrantedAuthority> roles = null;
-        Optional<UserData> userData = userRepository.getUserDataByEmail(email);
+        Optional<UserData> userData = userRepository.getUserDataByUsername(userName);
 
         if (userData == null) {
-            throw new UsernameNotFoundException(email);
+            throw new UsernameNotFoundException(userName);
         }
         else {
-            if (email.equals("admin")) {
+            if (userName.equals("admin")) {
                 roles = Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
                 return new User("admin", "admin", roles);
             }
             else {
-                String username = userData.get().getEmail();
+                String username = userData.get().getUsername();
                 String password = userData.get().getUserPassword();
                 roles = Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
                 return new User(username, password, roles);
