@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/authenticate", "/users/create")
+                .antMatchers(HttpMethod.POST,"/authenticate", "/users/create", "/swagger-ui")
                 .permitAll()
                 .antMatchers("/users/getAll", "/users/delete/**", "/users/deleteAll")
                 .hasRole("ADMIN")
