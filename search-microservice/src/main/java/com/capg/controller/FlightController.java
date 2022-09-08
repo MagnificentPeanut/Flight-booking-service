@@ -22,6 +22,10 @@ public class FlightController {
         return new ResponseEntity<FlightsDTO>(flightService.newFlight(flightsDTO), HttpStatus.CREATED);
     }
 
+    @GetMapping("/getByFromTo")
+    public List<FlightsDTO> flightByFromTo(@RequestParam("origin") String origin, @RequestParam("destination") String destination) {
+        return flightService.flightByOriginAndDestination(origin, destination);
+    }
     @GetMapping("/getAll")
     public List<FlightsDTO> flights(){
         return flightService.getFlights();

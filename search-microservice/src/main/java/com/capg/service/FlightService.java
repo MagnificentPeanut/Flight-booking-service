@@ -9,6 +9,9 @@ public interface FlightService {
 
     List<FlightsDTO> getFlights();
     FlightsDTO getFlight(Integer id);
+
+    List<FlightsDTO> flightByOriginAndDestination(String origin, String destination);
+
     FlightsDTO newFlight(FlightsDTO flightsDTO);
     FlightsDTO updateFlight(Integer id, FlightsDTO flightsDTO);
     void deleteFlight(Integer id);

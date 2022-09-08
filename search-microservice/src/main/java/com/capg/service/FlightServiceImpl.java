@@ -33,6 +33,12 @@ public class FlightServiceImpl implements FlightService{
         return new FlightsDTO(flights);
     }
 
+    @Override
+    public List<FlightsDTO> flightByOriginAndDestination(String origin, String destination) {
+        List<Flights> flights = flightRepository.findBy(origin, destination);
+        return flights.stream().map(FlightsDTO::new).collect(Collectors.toList());
+    }
+
     //Create new flight
     @Override
     public FlightsDTO newFlight(FlightsDTO flightsDTO) {
