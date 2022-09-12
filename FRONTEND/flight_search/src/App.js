@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
+
 import Webpages from './Components/Webpages';
+import ResponsiveAppBar from './Components/TopBar';
+import ButtonAppBar from './Components/ButtonAppBar';
 import Form from './Components/search_form'
 import './App.css';
 
 function App() {
   return (
     <div className='App'>
-      
-      <div className='TopBar'>
-        <h2>
-          Login
-        </h2>
-      </div>
-      <div className='Name'>
-        <h2>
-          Generic Airlines
-        </h2>
+      <div className='topbar'>
+        <ButtonAppBar/>
       </div>
       <div className='main'>
-        <Form />
+        <Webpages />
       </div>
     </div>
   );

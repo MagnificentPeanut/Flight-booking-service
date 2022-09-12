@@ -1,61 +1,83 @@
-import React, { Component } from 'react'
+import React, { useState, Component } from 'react'
+import ReactDOM from "react-dom/client";
 
-export class Form extends Component {
-    
-    constructor(props) {
-        super(props)
+import TextField from '@mui/material/TextField'
+import Autocomplete from '@mui/material/Autocomplete';
+import Button from '@mui/material/Button'
+import Stack from '@mui/material/Stack'
 
-        this.state = {
-            origin: '',
-            destination: ''
-        }
-        this.handleSubmit=this.handleSubmit.bind(this)
+function Form() {
+
+    const [inputs, setInputs] = useState({});
+
+    const handleChange = event => {
+        const name = event.target.name;
+        const value = event.target.value;
+        setInputs(values => ({ ...values, [name]: value }));
     }
+    // constructor(props) {
+    //     super(props)
 
-    handleOriginChange = (event) => {
-        this.setState({
-            origin: event.target.value
-        })
-    }
+    //     this.state = {
+    //         origin: '',
+    //         destination: ''
+    //     }
+    //     this.handleSubmit=this.handleSubmit.bind(this)
+    // }
 
-    handleDestinationChange = (event) => {
-        this.setState({
-            destination: event.target.value
-        })
-    }
+    // handleOriginChange = (event) => {
+    //     this.setState({
+    //         origin: event.target.value
+    //     })
+    // }
 
-    handleSubmit = event => {
-        alert(`Hello ${this.state.origin}, you have registered successfully!`)
-        console.log(this.state);
+    // handleDestinationChange = (event) => {
+    //     this.setState({
+    //         destination: event.target.value
+    //     })
+    // }
+
+    const handleSubmit = event => {
+        alert(`Hello ${inputs.origin}, ${inputs.destination}, you have registered successfully!`)
+        console.log(inputs);
         event.preventDefault()
     }
 
-    handleReset = () => {
-        this.setState({
-            origin: '',
-            destination: '',
-        })
-    }
+    // const handleReset = () => {
+    //     setInputs({
+    //         origin: '',
+    //         destination: '',
+    //     })
+    // }
 
-    render() {
-        const { origin, destination } = this.state
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <div>
-                    <label>Origin: </label>
-                    <input type='text' value={origin} autoFocus required
-                    onChange={this.handleOriginChange}
+    return (
+        <form onSubmit={handleSubmit}>
+            <div className='form'>
+                <Stack direction='row' spacing={2}>
+                    <TextField
+                        required
+                        autoFocus
+                        id="outlined-required"
+                        label="From"
+                        name='origin'
+                        value={inputs.origin || ""}
+                        onChange={handleChange}
                     />
-                    <label>Destination: </label>
-                    <input type='text' value={destination} 
-                    onChange={this.handleDestinationChange}
+                    <TextField
+                        required
+                        id="outlined-required"
+                        label="To"
+                        name='destination'
+                        value={inputs.destination || ""}
+                        onChange={handleChange}
                     />
-                </div>
-                <button type='submit'>Search</button>
-                <button type='reset' onClick={this.handleReset}>Reset</button>
-            </form>
-        )
-    }
+                    <Button variant='contained' type='submit'>Search Flight</Button>
+                    {/* <Button variant='contained' type='reset' onClick={handleReset}>Reset</Button> */}
+                </Stack>
+            </div>
+        </form>
+    )
+
 }
 
-export default Form
+export default Form;
