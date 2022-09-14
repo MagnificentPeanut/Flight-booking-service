@@ -15,7 +15,7 @@
 .main {
   width: auto;
   position: fixed;
-  top: 20%;
+  top: 16%;
   text-align: center;
   background-color: #fbfbfb;
   padding: 20px 20px;
@@ -23,9 +23,9 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  border: solid rgb(181, 218, 255) 3px;
+  
   border-radius: 8px;
-  font-size: 18px;
+  font-size: 20px;
   font-family: Poppins;
   color: #2363e3;
 }

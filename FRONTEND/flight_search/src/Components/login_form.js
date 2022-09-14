@@ -1,20 +1,18 @@
 import React, { Component, useState } from 'react';
-import ReactDOM from "react-dom/client";
 
-import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
+import Avatar from '@mui/material/Avatar';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import { Link, Typography } from '@mui/material';
 
 
 function Login() {
@@ -49,22 +47,32 @@ function Login() {
         return (
             <form onSubmit={handleSubmit}>
                 <div className='form'>
-                    <Stack direction='column' spacing={2}>
+                    <Stack alignItems='center' direction='column' spacing={2}>
+                        <Stack alignItems='center' direction='column' spacing={0}>
+                            <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+                                <LockOutlinedIcon />
+                            </Avatar>
+                            <Typography sx={{ m: 1}} component='h1' variant='h5' color='black'>Login</Typography>
+                        </Stack>
                         <TextField
                             required
+                            fullWidth
                             autoFocus
                             id="outlined-required"
                             label="Username"
                             name='username'
                             value={inputs.username}
+                            inputProps={{ pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$' }}
                             onChange={handleChange('username')}
                         />
                         <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                             <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-password"
+                                fullWidth
                                 type={inputs.showPassword ? 'text' : 'password'}
                                 value={inputs.password}
+                                inputProps={{ pattern: '[a-zA-Z0-9]{4,16}$' }}
                                 onChange={handleChange('password')}
                                 endAdornment={
                                 <InputAdornment position="end">
@@ -82,6 +90,10 @@ function Login() {
                             />
                         </FormControl>
                         <Button variant='contained' type='submit'>Login</Button>
+                        <Stack direction='row' spacing={1}>
+                            <Typography color={'GrayText'} variant='caption'>Not a user?</Typography>
+                            <Link href='/register' variant='caption'>Sign up</Link>
+                        </Stack>
                     </Stack>
                 </div>
             </form>

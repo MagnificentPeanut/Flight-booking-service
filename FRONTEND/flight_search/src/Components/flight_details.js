@@ -8,7 +8,7 @@ const Flights = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [flights, setFlights] = useState([]);
 
-    const url = "http://localhost:8084/flights/getAll"
+    const url = "http://localhost:8081/flights/getAll"
     useEffect(() => {
         axios.get(url)
             .then(res => {

@@ -7,7 +7,6 @@ import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 
 function Form() {
-
     const [inputs, setInputs] = useState({});
 
     const handleChange = event => {
@@ -15,40 +14,12 @@ function Form() {
         const value = event.target.value;
         setInputs(values => ({ ...values, [name]: value }));
     }
-    // constructor(props) {
-    //     super(props)
-
-    //     this.state = {
-    //         origin: '',
-    //         destination: ''
-    //     }
-    //     this.handleSubmit=this.handleSubmit.bind(this)
-    // }
-
-    // handleOriginChange = (event) => {
-    //     this.setState({
-    //         origin: event.target.value
-    //     })
-    // }
-
-    // handleDestinationChange = (event) => {
-    //     this.setState({
-    //         destination: event.target.value
-    //     })
-    // }
 
     const handleSubmit = event => {
         alert(`Hello ${inputs.origin}, ${inputs.destination}, you have registered successfully!`)
         console.log(inputs);
         event.preventDefault()
     }
-
-    // const handleReset = () => {
-    //     setInputs({
-    //         origin: '',
-    //         destination: '',
-    //     })
-    // }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -61,6 +32,7 @@ function Form() {
                         label="From"
                         name='origin'
                         value={inputs.origin || ""}
+                        inputProps={{ pattern: '[a-zA-Z]{3,15}$' }}
                         onChange={handleChange}
                     />
                     <TextField
@@ -69,10 +41,10 @@ function Form() {
                         label="To"
                         name='destination'
                         value={inputs.destination || ""}
+                        inputProps={{ pattern: '[a-zA-Z]{3,15}$' }}
                         onChange={handleChange}
                     />
                     <Button variant='contained' type='submit'>Search Flight</Button>
-                    {/* <Button variant='contained' type='reset' onClick={handleReset}>Reset</Button> */}
                 </Stack>
             </div>
         </form>

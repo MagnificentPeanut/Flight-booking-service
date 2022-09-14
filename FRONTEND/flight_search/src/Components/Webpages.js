@@ -5,6 +5,7 @@ import Form from './search_form';
 import ButtonAppBar from './ButtonAppBar';
 import Login from './login_form.js';
 import Flights from './flight_details';
+import Register from './registration_form';
 
 const Webpages = () => {
 
@@ -15,6 +16,7 @@ const Webpages = () => {
                 <Route path="/appbar" element= {<ButtonAppBar />} />
                 <Route path='/login' element = {<Login />} />
                 <Route path='/flights' element = {<Flights />} />
+                <Route path='/register' element = {<Register />} />
             </Routes>
         </Router>
     );
