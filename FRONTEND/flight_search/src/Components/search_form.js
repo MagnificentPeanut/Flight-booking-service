@@ -1,5 +1,6 @@
 import React, { useState, Component } from 'react'
 import ReactDOM from "react-dom/client";
+import Flights from './flight_details';
 
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete';
@@ -23,7 +24,7 @@ function Form() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div className='form'>
+            <div className='form'>                
                 <Stack direction='row' spacing={2}>
                     <TextField
                         required

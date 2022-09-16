@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 
 import Webpages from './Components/Webpages';
-import Box from '@mui/material/Box';
-import ResponsiveAppBar from './Components/TopBar';
 import ButtonAppBar from './Components/ButtonAppBar';
-import Form from './Components/search_form'
 import './App.css';
 
 function App() {

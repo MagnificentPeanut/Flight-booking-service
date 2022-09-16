@@ -3,14 +3,31 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
-const Flights = () => {
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import { Stack, Typography } from '@mui/material';
+
+
+const Flights = (props) => {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [flights, setFlights] = useState([]);
 
-    const url = "http://localhost:8081/flights/getAll"
+    const url = "http://localhost:8081/flights/getByFromTo"
+
+    const params = {
+        origin: 'Chennai',
+        destination: 'Cochin'
+    }
+
     useEffect(() => {
-        axios.get(url)
+        axios.get(url, { params })
             .then(res => {
                 console.log(res.data);
                 setFlights(res.data);
@@ -29,39 +46,40 @@ const Flights = () => {
         return <div>Loading...</div>;
     } else {
         return (
-            <div>
-                <h1>Employee Details</h1>
-                <table className='table table-striped table-bordered'>
-                    <thead>
-                        <tr>
-                            <th>Flight Name</th>
-                            <th>Origin</th>
-                            <th>Destination</th>
-                            <th>Departure Time</th>
-                            <th>Arrival</th>
-                            <th>Seats</th>
-                            <th>Fare</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            flights.map(flight =>
-                                <tr key={flight.flightId}>
-                                    <td>{flight.flightName}</td>
-                                    <td>{flight.origin}</td>
-                                    <td>{flight.destination}</td>
-                                    <td>{flight.departureTime}</td>
-                                    <td>{flight.arrivalTime}</td>
-                                    <td>{flight.seats}</td>
-                                    <td>{flight.fare}</td>
-                                </tr>
-                            )
-                        }
-                    </tbody>
-                </table>
-                <Link to="/login"><button>User</button>
-                </Link>
-            </div>
+            <Stack>
+                <Typography sx={{ mb: 2}} component='h1' variant='h4' color='black' align='left'>
+                    {params.origin} to {params.destination}
+                </Typography>
+                <TableContainer component={Paper} elevation={5} >
+                    <Table sx={{ minWidth: 850 }} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Flight name</TableCell>
+                                <TableCell align="right">Departure Time</TableCell>
+                                <TableCell align="right">Arrival Time</TableCell>
+                                <TableCell align="right">Seats</TableCell>
+                                <TableCell align="right">Fare</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {flights.map((flight) => (
+                                <TableRow
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    key={flight.flightId}
+                                >
+                                    <TableCell component="th" scope="row">
+                                        {flight.flightName}
+                                    </TableCell>
+                                    <TableCell align="right">{flight.departureTime}</TableCell>
+                                    <TableCell align="right">{flight.arrivalTime}</TableCell>
+                                    <TableCell align="right">{flight.seats}</TableCell>
+                                    <TableCell align="right"><CurrencyRupeeIcon fontSize='inherit' />{flight.fare}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Stack>
         );
     }
 }

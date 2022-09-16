@@ -1,4 +1,6 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
+
+import axios from 'axios';
 
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
@@ -39,8 +41,20 @@ function Login() {
     };
 
     const handleSubmit = event => {
-        alert(`Hello ${inputs.username}, ${inputs.password}, you have registered successfully!`)
-        console.log(inputs);
+        const authenticationRequest = {
+            username: inputs.username,
+            password: inputs.password
+        }
+        console.log(authenticationRequest);
+
+        axios.post('http://localhost:8083/authenticate', authenticationRequest)
+            .then((res) => {
+                console.log(res.data)
+                alert(`Welcome back ${inputs.username}!`)
+            }).catch((error) => {
+                alert(`Incorrect username or password`)
+                console.log(error)
+            });
         event.preventDefault()
     }
 
@@ -62,7 +76,7 @@ function Login() {
                             label="Username"
                             name='username'
                             value={inputs.username}
-                            inputProps={{ pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$' }}
+                            inputProps={{ pattern: '[a-zA-Z]{4,16}$' }}
                             onChange={handleChange('username')}
                         />
                         <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
@@ -98,7 +112,6 @@ function Login() {
                 </div>
             </form>
         )
-    
 }
 
 export default Login;

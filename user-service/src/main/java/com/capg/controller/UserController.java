@@ -1,6 +1,7 @@
 package com.capg.controller;
 
 import com.capg.dto.UserDataDTO;
+import com.capg.repository.UserRepository;
 import com.capg.service.UserDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,8 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
+    @Autowired
+    private UserRepository userRepository;
     @Autowired
     private UserDataService userDataService;
 
