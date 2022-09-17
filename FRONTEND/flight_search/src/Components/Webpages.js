@@ -6,6 +6,8 @@ import ButtonAppBar from './ButtonAppBar';
 import Login from './login_form.js';
 import Flights from './flight_details';
 import Register from './registration_form';
+import Dashboard from './admin_profile';
+import About from './about';
 
 const Webpages = () => {
 
@@ -17,6 +19,8 @@ const Webpages = () => {
                 <Route path='/login' element = {<Login />} />
                 <Route path='/flights' element = {<Flights />} />
                 <Route path='/register' element = {<Register />} />
+                <Route path='/admin' element = {<Dashboard />} />
+                <Route path='/about' element = {<About />} />
             </Routes>
         </Router>
     );

@@ -7,7 +7,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
 
 export default function ButtonAppBar() {
   return (
@@ -16,17 +16,19 @@ export default function ButtonAppBar() {
         <Toolbar>
           <IconButton
             size="large"
+            href='/'
             edge="start"
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            <HomeIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Generic Airlines
           </Typography>
-            <Button href='/login' color="inherit">Login</Button>
+          <Button href='/about' color="inherit">About us</Button>
+          <Button href='/login' color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
     </Box>

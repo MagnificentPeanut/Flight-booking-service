@@ -1,6 +1,8 @@
 .App {
   text-align: left;
   background-color: #b3e6ff;
+  background-image: url(https://media.cntraveler.com/photos/6299c3bc35ebf6fba2f5bf2d/16:9/w_2560%2Cc_limit/Airplane_GettyImages-118271203.jpg);
+  background-size: cover;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -9,6 +11,7 @@
   font-size: 20px;
   font-family: Poppins;
   color: #4c86dc;
+  overflow-y: scroll;
 }
 
 
@@ -23,8 +26,7 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  
-  border-radius: 8px;
+  border-radius: 5px;
   font-size: 20px;
   font-family: Poppins;
   color: #2363e3;

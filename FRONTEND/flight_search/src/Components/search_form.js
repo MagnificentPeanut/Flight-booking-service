@@ -1,13 +1,13 @@
-import React, { useState, Component } from 'react'
-import ReactDOM from "react-dom/client";
-import Flights from './flight_details';
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 import TextField from '@mui/material/TextField'
-import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 
+
 function Form() {
+    const navigate = useNavigate();
     const [inputs, setInputs] = useState({});
 
     const handleChange = event => {
@@ -17,37 +17,35 @@ function Form() {
     }
 
     const handleSubmit = event => {
-        alert(`Hello ${inputs.origin}, ${inputs.destination}, you have registered successfully!`)
         console.log(inputs);
         event.preventDefault()
+        navigate('/flights', { state: {origin: inputs.origin, destination: inputs.destination}})
     }
-
+    
     return (
         <form onSubmit={handleSubmit}>
-            <div className='form'>                
-                <Stack direction='row' spacing={2}>
-                    <TextField
-                        required
-                        autoFocus
-                        id="outlined-required"
-                        label="From"
-                        name='origin'
-                        value={inputs.origin || ""}
-                        inputProps={{ pattern: '[a-zA-Z]{3,15}$' }}
-                        onChange={handleChange}
-                    />
-                    <TextField
-                        required
-                        id="outlined-required"
-                        label="To"
-                        name='destination'
-                        value={inputs.destination || ""}
-                        inputProps={{ pattern: '[a-zA-Z]{3,15}$' }}
-                        onChange={handleChange}
-                    />
-                    <Button variant='contained' type='submit'>Search Flight</Button>
-                </Stack>
-            </div>
+            <Stack direction='row' spacing={2}>
+                <TextField
+                    required
+                    autoFocus
+                    id="outlined-required"
+                    label="From"
+                    name='origin'
+                    value={inputs.origin || ""}
+                    inputProps={{ pattern: '[a-zA-Z]{3,15}$' }}
+                    onChange={handleChange}
+                />
+                <TextField
+                    required
+                    id="outlined-required"
+                    label="To"
+                    name='destination'
+                    value={inputs.destination || ""}
+                    inputProps={{ pattern: '[a-zA-Z]{3,15}$' }}
+                    onChange={handleChange}
+                />
+                <Button variant='contained' type='submit'>Search Flight</Button>
+            </Stack>
         </form>
     )
 

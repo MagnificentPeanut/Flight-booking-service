@@ -15,10 +15,12 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { Link, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 
 function Login() {
     
+    const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         username: '',
         password: '',
@@ -56,6 +58,13 @@ function Login() {
                 console.log(error)
             });
         event.preventDefault()
+        if (inputs.username === 'admin'){
+            navigate('/admin')
+        }
+        else {
+            navigate('/register')
+        }
+        
     }
 
         return (
@@ -113,5 +122,4 @@ function Login() {
             </form>
         )
 }
-
 export default Login;
