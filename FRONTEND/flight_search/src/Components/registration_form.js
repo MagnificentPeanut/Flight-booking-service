@@ -1,6 +1,4 @@
-import React, { Component, useState } from 'react';
-import ReactDOM from "react-dom/client";
-
+import React, { useState } from 'react';
 import axios from 'axios';
 
 import IconButton from '@mui/material/IconButton';
@@ -17,11 +15,12 @@ import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { Link, Typography } from '@mui/material';
+import Paper from '@mui/material/Paper';
+import { Box, Link, Typography } from '@mui/material';
 
 
 function Register() {
-    
+
     const [inputs, setInputs] = useState({
         username: '',
         phoneNo: '',
@@ -34,12 +33,12 @@ function Register() {
 
     const handleChange = (prop) => (event) => {
         setInputs({ ...inputs, [prop]: event.target.value });
-      };
+    };
 
     const handleClickShowPassword = () => {
         setInputs({
-          ...inputs,
-          showPassword: !inputs.showPassword,
+            ...inputs,
+            showPassword: !inputs.showPassword,
         });
     };
 
@@ -70,78 +69,78 @@ function Register() {
 
     const password_error = inputs.verifypassword !== inputs.password
 
-        return (
+    return (
+        <Box component={Paper} elevation={5} sx={{ backgroundColor: 'white', borderRadius: 2 }}>
             <form onSubmit={handleSubmit}>
-                <div className='form'>
-                    <Stack alignItems='center' direction='column' spacing={2}>
-                        <Stack alignItems='center' direction='column' spacing={0}>
-                            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                                <LockOutlinedIcon />
-                            </Avatar>
-                            <Typography component='h1' variant='h5' color='black' >Sign Up</Typography>
-                        </Stack>
-                        <Stack sx={{ m: 1, width: 'stretch' }} alignItems='center' direction='row' spacing={2}>
-                            <TextField
-                                required
-                                fullWidth
-                                autoFocus
-                                id="outlined-required-username"
-                                label="username"
-                                name='username'
-                                value={inputs.username}
-                                inputProps={{ pattern: '[a-zA-Z]{4,16}$' }}
-                                onChange={handleChange('username')}
-                            />
-                            <TextField
-                                required
-                                fullWidth
-                                id="outlined-required-phoneNo"
-                                label="phone number"
-                                name='phoneNo'
-                                value={inputs.phoneNo}
-                                inputProps={{ pattern: '[0-9]{10}$' }}
-                                onChange={handleChange('phoneNo')}
-                            />
-                        </Stack>
+                <Stack sx={{ m: 2 }} alignItems='center' direction='column' spacing={2}>
+                    <Stack alignItems='center' direction='column' spacing={0}>
+                        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                            <LockOutlinedIcon />
+                        </Avatar>
+                        <Typography component='h1' variant='h5' color='black' >Sign Up</Typography>
+                    </Stack>
+                    <Stack sx={{ m: 1, width: 'stretch' }} alignItems='center' direction='row' spacing={2}>
                         <TextField
                             required
                             fullWidth
-                            id="outlined-required-email"
-                            label="email"
-                            name='email'
-                            value={inputs.email}
-                            inputProps={{ pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$' }}
-                            onChange={handleChange('email')}
+                            autoFocus
+                            id="outlined-required-username"
+                            label="username"
+                            name='username'
+                            value={inputs.username}
+                            inputProps={{ pattern: '[a-zA-Z]{4,16}$' }}
+                            onChange={handleChange('username')}
                         />
-                        <FormControl sx={{ m: 1, width: 'stretch' }} variant="outlined">
-                            <InputLabel htmlFor="outlined-adornment-email">verify email</InputLabel>
+                        <TextField
+                            required
+                            fullWidth
+                            id="outlined-required-phoneNo"
+                            label="phone number"
+                            name='phoneNo'
+                            value={inputs.phoneNo}
+                            inputProps={{ pattern: '[0-9]{10}$' }}
+                            onChange={handleChange('phoneNo')}
+                        />
+                    </Stack>
+                    <TextField
+                        required
+                        fullWidth
+                        id="outlined-required-email"
+                        label="email"
+                        name='email'
+                        value={inputs.email}
+                        inputProps={{ pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$' }}
+                        onChange={handleChange('email')}
+                    />
+                    <FormControl sx={{ m: 1, width: 'stretch' }} variant="outlined">
+                        <InputLabel htmlFor="outlined-adornment-email">verify email</InputLabel>
+                        <OutlinedInput
+                            id="outlined-adornment-verifyemail"
+                            required
+                            fullWidth
+                            type='text'
+                            value={inputs.verifyemail}
+                            onChange={handleChange('verifyemail')}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    {email_error ? <ClearRoundedIcon color='error' /> : <CheckRoundedIcon color='success' />}
+                                </InputAdornment>
+                            }
+                            label="verifyemail"
+                        />
+                    </FormControl>
+                    <Stack alignItems='center' direction='row' spacing={2}>
+                        <FormControl sx={{ width: 'auto' }} variant="outlined">
+                            <InputLabel htmlFor="outlined-adornment-password">password</InputLabel>
                             <OutlinedInput
-                                id="outlined-adornment-verifyemail"
+                                id="outlined-adornment-password"
                                 required
                                 fullWidth
-                                type='text'
-                                value={inputs.verifyemail}
-                                onChange={handleChange('verifyemail')}
+                                type={inputs.showPassword ? 'text' : 'password'}
+                                value={inputs.password}
+                                inputProps={{ pattern: '[a-zA-Z0-9]{4,16}$' }}
+                                onChange={handleChange('password')}
                                 endAdornment={
-                                <InputAdornment position="end">
-                                    {email_error ? <ClearRoundedIcon color='error' /> : <CheckRoundedIcon color='success'/>}
-                                </InputAdornment>
-                                }
-                                label="verifyemail"
-                            />
-                        </FormControl>
-                        <Stack alignItems='center' direction='row' spacing={2}>
-                            <FormControl sx={{ width: 'auto' }} variant="outlined">
-                                <InputLabel htmlFor="outlined-adornment-password">password</InputLabel>
-                                <OutlinedInput
-                                    id="outlined-adornment-password"
-                                    required
-                                    fullWidth
-                                    type={inputs.showPassword ? 'text' : 'password'}
-                                    value={inputs.password}
-                                    inputProps={{ pattern: '[a-zA-Z0-9]{4,16}$' }}
-                                    onChange={handleChange('password')}
-                                    endAdornment={
                                     <InputAdornment position="end">
                                         <IconButton
                                             aria-label="toggle password visibility"
@@ -152,39 +151,39 @@ function Register() {
                                             {inputs.showPassword ? <VisibilityOff /> : <Visibility />}
                                         </IconButton>
                                     </InputAdornment>
-                                    }
-                                    label="password"
-                                />
-                            </FormControl>
-                            <FormControl sx={{ width: 'auto' }} variant="outlined">
-                                <InputLabel htmlFor="outlined-adornment-email">verify password</InputLabel>
-                                <OutlinedInput
-                                    id="outlined-adornment-verifypassword"
-                                    required
-                                    fullWidth
-                                    type='password'
-                                    value={inputs.verifypassword}
-                                    onChange={handleChange('verifypassword')}
-                                    endAdornment={
+                                }
+                                label="password"
+                            />
+                        </FormControl>
+                        <FormControl sx={{ width: 'auto' }} variant="outlined">
+                            <InputLabel htmlFor="outlined-adornment-email">verify password</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-verifypassword"
+                                required
+                                fullWidth
+                                type='password'
+                                value={inputs.verifypassword}
+                                onChange={handleChange('verifypassword')}
+                                endAdornment={
                                     <InputAdornment position="end">
-                                        {password_error ? <ClearRoundedIcon color='error' /> : <CheckRoundedIcon color='success'/>}
+                                        {password_error ? <ClearRoundedIcon color='error' /> : <CheckRoundedIcon color='success' />}
                                     </InputAdornment>
-                                    }
-                                    label="verifypassword"
-                                />
-                            </FormControl>
-                        </Stack>
-                        
-                        <Button variant='contained' type='submit'>Sign up</Button>
-                        <Stack direction='row' spacing={1}>
-                            <Typography color={'GrayText'} variant='caption'>Already a user?</Typography>
-                            <Link href='/login' variant='caption'>Login</Link>
-                        </Stack>
+                                }
+                                label="verifypassword"
+                            />
+                        </FormControl>
                     </Stack>
-                </div>
+
+                    <Button variant='contained' type='submit'>Sign up</Button>
+                    <Stack direction='row' spacing={1}>
+                        <Typography color={'GrayText'} variant='caption'>Already a user?</Typography>
+                        <Link href='/login' variant='caption'>Login</Link>
+                    </Stack>
+                </Stack>
             </form>
-        )
-    
+        </Box>
+    )
+
 }
 
 export default Register;

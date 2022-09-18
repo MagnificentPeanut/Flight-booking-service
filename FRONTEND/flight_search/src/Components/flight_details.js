@@ -14,11 +14,10 @@ import Paper from '@mui/material/Paper';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import CircularProgress from '@mui/material/CircularProgress';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
+import { Box, Stack, Typography } from '@mui/material';
 
-import { Stack, Typography } from '@mui/material';
 
-
-const Flights = (props) => {
+const Flights = () => {
     const location = useLocation()
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -51,68 +50,78 @@ const Flights = (props) => {
     if (error) {
         return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
-        return <Stack sx={{ width: 850, display: 'flex', alignItems: 'center' }}><CircularProgress /></Stack>;
-    } 
+        return (
+            <Box sx={{ backgroundColor: 'white', borderRadius: 2 }}>
+                <Stack sx={{ m: 2, width: 850, display: 'flex', alignItems: 'center' }}>
+                    <CircularProgress />
+                </Stack>;
+            </Box>
+        )
+    }
     else if (flights.length === 0) {
         return (
-            <Stack sx={{ width: 850, display: 'flex' }}>
-                <FlightTakeoffIcon sx={{ mb: 1, fontSize: '150%', color: 'black' }} />
-                <Typography component='h1' variant='caption' color='black' align='left'>
-                    Departing flight
-                </Typography>
-                <Typography sx={{ mb: 2 }} component='h1' variant='h4' color='black' align='left'>
-                    {params.origin} to {params.destination}
-                </Typography>
-                <Typography sx={{ mt: 5, mb: 2 }} component='h1' variant='body1' color='black' align='center'>
-                    Oops! Looks like there are no current flights from {params.origin} to {params.destination}
-                </Typography>
-            </Stack>
+            <Box sx={{ backgroundColor: 'white', borderRadius: 2 }}>
+                <Stack sx={{ m: 2, width: 850, display: 'flex' }}>
+                    <FlightTakeoffIcon sx={{ mb: 1, fontSize: '150%', color: 'black' }} />
+                    <Typography component='h1' variant='caption' color='black' align='left'>
+                        Departing flight
+                    </Typography>
+                    <Typography sx={{ mb: 2 }} component='h1' variant='h4' color='black' align='left'>
+                        {params.origin} to {params.destination}
+                    </Typography>
+                    <Typography sx={{ mt: 5, mb: 2 }} component='h1' variant='body1' color='black' align='center'>
+                        Oops! Looks like there are no current flights from {params.origin} to {params.destination}
+                    </Typography>
+                </Stack>
+            </Box>
         );
-    } 
+    }
     else {
         return (
-            <Stack>
-                <FlightTakeoffIcon sx={{ mb: 1, fontSize: '150%', color: 'black' }} />
-                <Typography component='h1' variant='caption' color='black' align='left'>
-                    Departing flight
-                </Typography>
-                <Typography sx={{ mb: 2 }} component='h1' variant='h4' color='black' align='left'>
-                    {params.origin} to {params.destination}
-                </Typography>
-                <TableContainer component={Paper} elevation={5} sx={{ maxHeight: 400 }} >
-                    <Table sx={{ minWidth: 800 }} aria-label="simple table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Airline</TableCell>
-                                <TableCell>Departure Time</TableCell>
-                                <TableCell>Arrival Time</TableCell>
-                                <TableCell align="right">Seats</TableCell>
-                                <TableCell align="right">Fare</TableCell>
-                                <TableCell align="center">Book</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {flights.map((flight) => (
-                                <TableRow
-                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    key={flight.flightId}
-                                >
-                                    <TableCell component="th" scope="row">
-                                        {flight.flightName}
-                                    </TableCell>
-                                    <TableCell>{flight.departureTime}</TableCell>
-                                    <TableCell>{flight.arrivalTime}</TableCell>
-                                    <TableCell align="right">{flight.seats}</TableCell>
-                                    <TableCell align="right"><CurrencyRupeeIcon fontSize='inherit' />{flight.fare}</TableCell>
-                                    <TableCell sx={{ maxWidth: 40 }} align="center">
-                                        <Button href='/login' variant='contained' color="inherit">Book</Button>
-                                    </TableCell>
+            <Box component={Paper} elevation={5} sx={{ backgroundColor: 'white', borderRadius: 2 }}>
+                <Stack sx={{ m: 2 }}>
+                    <FlightTakeoffIcon sx={{ mb: 1, fontSize: '150%', color: 'black' }} />
+                    <Typography component='h1' variant='caption' color='black' align='left'>
+                        Departing flight
+                    </Typography>
+                    <Typography sx={{ mb: 2 }} component='h1' variant='h4' color='black' align='left'>
+                        {params.origin} to {params.destination}
+                    </Typography>
+                    <TableContainer sx={{ maxHeight: 400 }} >
+                        <Table sx={{ minWidth: 800 }} aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Airline</TableCell>
+                                    <TableCell>Departure Time</TableCell>
+                                    <TableCell>Arrival Time</TableCell>
+                                    <TableCell align="right">Seats</TableCell>
+                                    <TableCell align="right">Fare</TableCell>
+                                    <TableCell align="center">Book</TableCell>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </Stack>
+                            </TableHead>
+                            <TableBody>
+                                {flights.map((flight) => (
+                                    <TableRow
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        key={flight.flightId}
+                                    >
+                                        <TableCell component="th" scope="row">
+                                            {flight.flightName}
+                                        </TableCell>
+                                        <TableCell>{flight.departureTime}</TableCell>
+                                        <TableCell>{flight.arrivalTime}</TableCell>
+                                        <TableCell align="right">{flight.seats}</TableCell>
+                                        <TableCell align="right"><CurrencyRupeeIcon fontSize='inherit' />{flight.fare}</TableCell>
+                                        <TableCell sx={{ maxWidth: 40 }} align="center">
+                                            <Button href='/login' variant='contained' color="inherit">Book</Button>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Stack>
+            </Box>
         );
     }
 }

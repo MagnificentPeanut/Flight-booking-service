@@ -28,6 +28,7 @@ export default function ButtonAppBar() {
             Generic Airlines
           </Typography>
           <Button href='/about' color="inherit">About us</Button>
+          <Button href='/register' color="inherit">Sign Up</Button>
           <Button href='/login' color="inherit">Login</Button>
         </Toolbar>
       </AppBar>

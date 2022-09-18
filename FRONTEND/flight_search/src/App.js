@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import Webpages from './Components/Webpages';
 import ButtonAppBar from './Components/ButtonAppBar';
@@ -10,9 +10,7 @@ function App() {
       <div className='topbar'>
         <ButtonAppBar/>
       </div>
-      <div className='main'>
-        <Webpages />
-      </div>
+      <Webpages />
     </div>
   );
 }

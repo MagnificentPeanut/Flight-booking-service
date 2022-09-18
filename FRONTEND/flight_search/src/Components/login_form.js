@@ -14,12 +14,13 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { Link, Typography } from '@mui/material';
+import Paper from '@mui/material/Paper';
+import { Box, Link, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 
 function Login() {
-    
+
     const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         username: '',
@@ -29,12 +30,12 @@ function Login() {
 
     const handleChange = (prop) => (event) => {
         setInputs({ ...inputs, [prop]: event.target.value });
-      };
+    };
 
     const handleClickShowPassword = () => {
         setInputs({
-          ...inputs,
-          showPassword: !inputs.showPassword,
+            ...inputs,
+            showPassword: !inputs.showPassword,
         });
     };
 
@@ -53,29 +54,31 @@ function Login() {
             .then((res) => {
                 console.log(res.data)
                 alert(`Welcome back ${inputs.username}!`)
+                if (inputs.username === 'admin') {
+                    navigate('/admin', { state: { jwt: res.data.jwt } })
+                }
+                else {
+                    navigate('/register')
+                }
             }).catch((error) => {
                 alert(`Incorrect username or password`)
                 console.log(error)
             });
         event.preventDefault()
-        if (inputs.username === 'admin'){
-            navigate('/admin')
-        }
-        else {
-            navigate('/register')
-        }
         
+
     }
 
-        return (
+    return (
+        <Box component={Paper} elevation={5} sx={{ backgroundColor: 'white', borderRadius: 2 }}>
             <form onSubmit={handleSubmit}>
                 <div className='form'>
-                    <Stack alignItems='center' direction='column' spacing={2}>
+                    <Stack sx={{ m: 2}} alignItems='center' direction='column' spacing={2}>
                         <Stack alignItems='center' direction='column' spacing={0}>
                             <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
                                 <LockOutlinedIcon />
                             </Avatar>
-                            <Typography sx={{ m: 1}} component='h1' variant='h5' color='black'>Login</Typography>
+                            <Typography sx={{ m: 1 }} component='h1' variant='h5' color='black'>Login</Typography>
                         </Stack>
                         <TextField
                             required
@@ -98,16 +101,16 @@ function Login() {
                                 inputProps={{ pattern: '[a-zA-Z0-9]{4,16}$' }}
                                 onChange={handleChange('password')}
                                 endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge="end"
-                                    >
-                                        {inputs.showPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                </InputAdornment>
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={handleMouseDownPassword}
+                                            edge="end"
+                                        >
+                                            {inputs.showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
                                 }
                                 label="Password"
                             />
@@ -120,6 +123,7 @@ function Login() {
                     </Stack>
                 </div>
             </form>
-        )
+        </Box>
+    )
 }
 export default Login;
