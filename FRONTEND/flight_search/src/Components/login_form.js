@@ -18,9 +18,7 @@ import Paper from '@mui/material/Paper';
 import { Box, Link, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-
 function Login() {
-
     const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         username: '',
@@ -53,7 +51,6 @@ function Login() {
         axios.post('http://localhost:8083/authenticate', authenticationRequest)
             .then((res) => {
                 console.log(res.data)
-                alert(`Welcome back ${inputs.username}!`)
                 if (inputs.username === 'admin') {
                     navigate('/admin', { state: { jwt: res.data.jwt } })
                 }
@@ -65,7 +62,7 @@ function Login() {
                 console.log(error)
             });
         event.preventDefault()
-        
+
 
     }
 
@@ -73,7 +70,7 @@ function Login() {
         <Box component={Paper} elevation={5} sx={{ backgroundColor: 'white', borderRadius: 2 }}>
             <form onSubmit={handleSubmit}>
                 <div className='form'>
-                    <Stack sx={{ m: 2}} alignItems='center' direction='column' spacing={2}>
+                    <Stack sx={{ m: 2 }} alignItems='center' direction='column' spacing={2}>
                         <Stack alignItems='center' direction='column' spacing={0}>
                             <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
                                 <LockOutlinedIcon />

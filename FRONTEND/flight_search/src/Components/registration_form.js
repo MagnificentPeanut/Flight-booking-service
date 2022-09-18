@@ -18,8 +18,23 @@ import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import { Box, Link, Typography } from '@mui/material';
 
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function Register() {
+    const [open, setOpen] = React.useState(false);
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
 
     const [inputs, setInputs] = useState({
         username: '',
@@ -47,7 +62,6 @@ function Register() {
     };
 
     const handleSubmit = event => {
-        alert(`Hello ${inputs.username}, you have registered successfully!`)
         const userObject = {
             username: inputs.username,
             phoneNo: inputs.phoneNo,
@@ -59,6 +73,7 @@ function Register() {
         axios.post('http://localhost:8083/users/create', userObject)
             .then((res) => {
                 console.log(res.data)
+                setOpen(true);
             }).catch((error) => {
                 console.log(error)
             });
@@ -179,6 +194,11 @@ function Register() {
                         <Typography color={'GrayText'} variant='caption'>Already a user?</Typography>
                         <Link href='/login' variant='caption'>Login</Link>
                     </Stack>
+                    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                            Hello {inputs.username}, you have registered successfully!
+                        </Alert>
+                    </Snackbar>
                 </Stack>
             </form>
         </Box>

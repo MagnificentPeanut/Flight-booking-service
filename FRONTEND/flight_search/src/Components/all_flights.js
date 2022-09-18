@@ -22,6 +22,13 @@ import CircularProgress from '@mui/material/CircularProgress';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import { Box, Stack, Typography } from '@mui/material';
 
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -34,6 +41,16 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function GetAllFlights() {
+    const [open, setOpen] = React.useState(false);
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [flights, setFlights] = useState([]);
@@ -53,6 +70,7 @@ export default function GetAllFlights() {
         axios.delete(deleteUrl + flight.flightId)
             .then((res) => {
                 console.log(res.data)
+                setOpen(true);
             }).catch((error) => {
                 console.log(error)
             });
@@ -184,6 +202,11 @@ export default function GetAllFlights() {
                     </CardContent>
                 </Collapse>
             </Card>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    Flight deleted successfully!
+                </Alert>
+            </Snackbar>
         </Stack>
     );
 }

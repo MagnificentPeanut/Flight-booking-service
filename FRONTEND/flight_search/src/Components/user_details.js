@@ -22,6 +22,12 @@ import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Box, Stack, Typography } from '@mui/material';
 
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -39,6 +45,16 @@ export default function GetUserDetails() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [user, setUser] = useState([]);
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
 
     let config = {
         headers: {
@@ -61,6 +77,7 @@ export default function GetUserDetails() {
         axios.delete(deleteUrl + user.userId, config)
             .then((res) => {
                 console.log(res.data)
+                setOpen(true);
             }).catch((error) => {
                 console.log(error)
             });
@@ -182,6 +199,11 @@ export default function GetUserDetails() {
                     </CardContent>
                 </Collapse>
             </Card>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    User deleted successfully!
+                </Alert>
+            </Snackbar>
         </Stack>
     );
 }

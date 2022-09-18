@@ -20,6 +20,13 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { Typography } from '@mui/material';
 
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -32,6 +39,16 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function RecipeReviewCard() {
+    const [open, setOpen] = React.useState(false);
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+
     const [inputs, setInputs] = useState({
         flightName: '',
         origin: '',
@@ -48,7 +65,6 @@ export default function RecipeReviewCard() {
     };
 
     const handleSubmit = event => {
-        alert(`${inputs.flightName} added successfully!`)
         const userObject = {
             flightName: inputs.flightName,
             origin: inputs.origin,
@@ -63,6 +79,7 @@ export default function RecipeReviewCard() {
         axios.post('http://localhost:8081/flights/create', userObject)
             .then((res) => {
                 console.log(res.data)
+                setOpen(true);
             }).catch((error) => {
                 console.log(error)
             });
@@ -77,7 +94,7 @@ export default function RecipeReviewCard() {
 
     return (
         <Stack alignItems='center' direction='column' spacing={2}>
-            <Stack  alignItems='center' direction='row' spacing={2}>
+            <Stack alignItems='center' direction='row' spacing={2}>
                 <GetAllFlights />
                 <GetBookingDetails />
                 <GetUserDetails />
@@ -184,6 +201,11 @@ export default function RecipeReviewCard() {
                     </Collapse>
                 </Card>
                 <UpdateFlights />
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                        Flight added successfully!
+                    </Alert>
+                </Snackbar>
             </Stack>
         </Stack>
     );
