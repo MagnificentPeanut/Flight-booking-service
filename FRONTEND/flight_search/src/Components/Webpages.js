@@ -1,13 +1,13 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
-import Form from './search_form';
+import Form from './SearchForm';
 import ButtonAppBar from './ButtonAppBar';
-import Login from './login_form.js';
-import Flights from './flight_details';
-import Register from './registration_form';
-import Dashboard from './admin_profile';
-import About from './about';
+import Login from './LoginForm.js';
+import Flights from './FlightDetails';
+import Register from './RegistrationForm';
+import Dashboard from './AdminProfile';
+import About from './About';
 
 const Webpages = () => {
 

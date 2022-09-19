@@ -52,7 +52,6 @@ export default function GetUserDetails() {
         if (reason === 'clickaway') {
             return;
         }
-
         setOpen(false);
     };
 

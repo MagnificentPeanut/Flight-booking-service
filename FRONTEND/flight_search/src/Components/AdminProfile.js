@@ -10,10 +10,10 @@ import IconButton from '@mui/material/IconButton';
 import { blue } from '@mui/material/colors';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import UpdateFlights from './update_flights';
-import GetAllFlights from './all_flights';
-import GetBookingDetails from './booking_details';
-import GetUserDetails from './user_details';
+import UpdateFlights from './UpdateFlights';
+import GetAllFlights from './GetAllFlights';
+import GetBookingDetails from './BookingDetails';
+import GetUserDetails from './UserDetails';
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
