@@ -7,6 +7,7 @@ import Login from './LoginForm.js';
 import Flights from './FlightDetails';
 import Register from './RegistrationForm';
 import Dashboard from './AdminProfile';
+import BookFlight from './BookingForm';
 import About from './About';
 
 const Webpages = () => {
@@ -21,6 +22,7 @@ const Webpages = () => {
                 <Route path='/register' element = {<Register />} />
                 <Route path='/admin' element = {<Dashboard />} />
                 <Route path='/about' element = {<About />} />
+                <Route path='/book' element = {<BookFlight />} />
             </Routes>
         </Router>
     );

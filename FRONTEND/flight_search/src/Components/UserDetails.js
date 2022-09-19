@@ -13,7 +13,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -24,6 +24,26 @@ import { Box, Stack, Typography } from '@mui/material';
 
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: blue[800],
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+  
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -162,35 +182,35 @@ export default function GetUserDetails() {
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
-                        <TableContainer sx={{ maxHeight: 240 }} >
-                            <Table sx={{ minWidth: 800 }} aria-label="simple table">
+                        <TableContainer sx={{ maxHeight: 310, borderRadius: 1 }} >
+                            <Table stickyHeader sx={{ minWidth: 700 }} aria-label="simple table">
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>User ID</TableCell>
-                                        <TableCell>Username</TableCell>
-                                        <TableCell>Phone No</TableCell>
-                                        <TableCell>Email</TableCell>
-                                        <TableCell>User Password</TableCell>
-                                        <TableCell align="center">Delete User</TableCell>
+                                        <StyledTableCell>User ID</StyledTableCell>
+                                        <StyledTableCell>Username</StyledTableCell>
+                                        <StyledTableCell>Phone No</StyledTableCell>
+                                        <StyledTableCell>Email</StyledTableCell>
+                                        <StyledTableCell>Password</StyledTableCell>
+                                        <StyledTableCell align="center">Delete User</StyledTableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
                                     {user.map((user) => (
-                                        <TableRow
+                                        <StyledTableRow
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                             key={user.userId}
                                         >
-                                            <TableCell component="th" scope="row">
+                                            <StyledTableCell component="th" scope="row">
                                                 {user.userId}
-                                            </TableCell>
-                                            <TableCell>{user.username}</TableCell>
-                                            <TableCell>{user.phoneNo}</TableCell>
-                                            <TableCell>{user.email}</TableCell>
-                                            <TableCell>{user.userPassword}</TableCell>
-                                            <TableCell align="center">
+                                            </StyledTableCell>
+                                            <StyledTableCell>{user.username}</StyledTableCell>
+                                            <StyledTableCell>{user.phoneNo}</StyledTableCell>
+                                            <StyledTableCell>{user.email}</StyledTableCell>
+                                            <StyledTableCell>{user.userPassword}</StyledTableCell>
+                                            <StyledTableCell align="center">
                                                 <Button size='small' variant='contained' color="error" onClick={() => handleDelete(user)}>Delete</Button>
-                                            </TableCell>
-                                        </TableRow>
+                                            </StyledTableCell>
+                                        </StyledTableRow>
                                     ))}
                                 </TableBody>
                             </Table>

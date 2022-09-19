@@ -55,7 +55,7 @@ function Login() {
                     navigate('/admin', { state: { jwt: res.data.jwt } })
                 }
                 else {
-                    navigate('/register')
+                    navigate('/')
                 }
             }).catch((error) => {
                 alert(`Incorrect username or password`)

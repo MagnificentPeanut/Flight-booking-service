@@ -12,7 +12,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -24,6 +24,26 @@ import { Box, Stack, Typography } from '@mui/material';
 
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: blue[800],
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+  
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -156,45 +176,41 @@ export default function GetAllFlights() {
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
-                        <FlightTakeoffIcon sx={{ fontSize: '150%', color: 'black' }} />
-                        <Typography component='h1' variant='caption' color='black' align='left' sx={{ mb: 2 }}>
-                            Departing flights
-                        </Typography>
-                        <TableContainer sx={{ maxHeight: 240 }} >
-                            <Table sx={{ minWidth: 800 }} aria-label="simple table">
+                        <TableContainer sx={{ maxHeight: 310, borderRadius: 1 }} >
+                            <Table stickyHeader sx={{ minWidth: 1000 }} aria-label="simple table">
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>Flight ID</TableCell>
-                                        <TableCell>Airline</TableCell>
-                                        <TableCell>Origin</TableCell>
-                                        <TableCell>Destination</TableCell>
-                                        <TableCell>Departure Time</TableCell>
-                                        <TableCell>Arrival Time</TableCell>
-                                        <TableCell align="right">Seats</TableCell>
-                                        <TableCell align="right">Fare</TableCell>
-                                        <TableCell align="center">Delete</TableCell>
+                                        <StyledTableCell>Flight ID</StyledTableCell>
+                                        <StyledTableCell>Airline</StyledTableCell>
+                                        <StyledTableCell>Origin</StyledTableCell>
+                                        <StyledTableCell>Destination</StyledTableCell>
+                                        <StyledTableCell>Departure Time</StyledTableCell>
+                                        <StyledTableCell>Arrival Time</StyledTableCell>
+                                        <StyledTableCell align="right">Seats</StyledTableCell>
+                                        <StyledTableCell align="right">Fare</StyledTableCell>
+                                        <StyledTableCell align="center">Delete</StyledTableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
                                     {flights.map((flight) => (
-                                        <TableRow
+                                        <StyledTableRow
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                             key={flight.flightId}
                                         >
-                                            <TableCell component="th" scope="row">
+                                            <StyledTableCell component="th" scope="row">
                                                 {flight.flightId}
-                                            </TableCell>
-                                            <TableCell>{flight.flightName}</TableCell>
-                                            <TableCell>{flight.origin}</TableCell>
-                                            <TableCell>{flight.destination}</TableCell>
-                                            <TableCell>{flight.departureTime}</TableCell>
-                                            <TableCell>{flight.arrivalTime}</TableCell>
-                                            <TableCell align="right">{flight.seats}</TableCell>
-                                            <TableCell sx={{ minWidth: 55 }} align="right"><CurrencyRupeeIcon fontSize='inherit' />{flight.fare}</TableCell>
-                                            <TableCell align="center">
+                                            </StyledTableCell>
+                                            <StyledTableCell>{flight.flightName}</StyledTableCell>
+                                            <StyledTableCell>{flight.origin}</StyledTableCell>
+                                            <StyledTableCell>{flight.destination}</StyledTableCell>
+                                            <StyledTableCell>{flight.departureTime}</StyledTableCell>
+                                            <StyledTableCell>{flight.arrivalTime}</StyledTableCell>
+                                            <StyledTableCell align="right">{flight.seats}</StyledTableCell>
+                                            <StyledTableCell sx={{ minWidth: 55 }} align="right"><CurrencyRupeeIcon fontSize='inherit' />{flight.fare}</StyledTableCell>
+                                            <StyledTableCell align="center">
                                                 <Button size='small' variant='contained' color="error" onClick={() => handleDelete(flight)}>Delete</Button>
-                                            </TableCell>
-                                        </TableRow>
+                                            </StyledTableCell>
+                                        </StyledTableRow>
                                     ))}
                                 </TableBody>
                             </Table>

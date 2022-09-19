@@ -9,16 +9,15 @@ import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import { blue } from '@mui/material/colors';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import { Typography } from '@mui/material';
 
 import UpdateFlights from './UpdateFlights';
 import GetAllFlights from './GetAllFlights';
 import GetBookingDetails from './BookingDetails';
 import GetUserDetails from './UserDetails';
-
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import { Typography } from '@mui/material';
 
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';

@@ -12,7 +12,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -21,6 +21,26 @@ import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import CircularProgress from '@mui/material/CircularProgress';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import { Box, Stack, Typography } from '@mui/material';
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: blue[800],
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+  
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -126,55 +146,55 @@ export default function GetBookingDetails() {
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
-                        <TableContainer sx={{ maxHeight: 240 }} >
-                            <Table sx={{ minWidth: 800 }} aria-label="simple table">
+                        <TableContainer sx={{ maxHeight: 310, borderRadius: 1 }} >
+                            <Table stickyHeader sx={{ minWidth: 2000 }} aria-label="simple table">
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>Booking ID</TableCell>
-                                        <TableCell>First Name</TableCell>
-                                        <TableCell>Last Name</TableCell>
-                                        <TableCell>Gender</TableCell>
-                                        <TableCell>Email</TableCell>
-                                        <TableCell>Phone No</TableCell>
-                                        <TableCell>Booked Seats</TableCell>
-                                        <TableCell>Flight ID</TableCell>
-                                        <TableCell>Airline</TableCell>
-                                        <TableCell>Origin</TableCell>
-                                        <TableCell>Destination</TableCell>
-                                        <TableCell>Departure Time</TableCell>
-                                        <TableCell>Arrival Time</TableCell>
-                                        <TableCell align="right">Seats</TableCell>
-                                        <TableCell align="right">Fare</TableCell>
-                                        <TableCell align="right">Booked On</TableCell>
-                                        <TableCell align="right">Updated On</TableCell>
+                                        <StyledTableCell>Booking ID</StyledTableCell>
+                                        <StyledTableCell>First Name</StyledTableCell>
+                                        <StyledTableCell>Last Name</StyledTableCell>
+                                        <StyledTableCell>Gender</StyledTableCell>
+                                        <StyledTableCell>Email</StyledTableCell>
+                                        <StyledTableCell>Phone No</StyledTableCell>
+                                        <StyledTableCell>Booked Seats</StyledTableCell>
+                                        <StyledTableCell>Flight ID</StyledTableCell>
+                                        <StyledTableCell>Airline</StyledTableCell>
+                                        <StyledTableCell>Origin</StyledTableCell>
+                                        <StyledTableCell>Destination</StyledTableCell>
+                                        <StyledTableCell>Departure Time</StyledTableCell>
+                                        <StyledTableCell>Arrival Time</StyledTableCell>
+                                        <StyledTableCell align="right">Seats</StyledTableCell>
+                                        <StyledTableCell align="right">Fare</StyledTableCell>
+                                        <StyledTableCell align="right">Booked On</StyledTableCell>
+                                        <StyledTableCell align="right">Updated On</StyledTableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
                                     {booking.map((book) => (
-                                        <TableRow
+                                        <StyledTableRow
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                             key={book.bookingId}
                                         >
-                                            <TableCell component="th" scope="row">
+                                            <StyledTableCell component="th" scope="row">
                                                 {book.bookingId}
-                                            </TableCell>
-                                            <TableCell>{book.firstName}</TableCell>
-                                            <TableCell>{book.lastName}</TableCell>
-                                            <TableCell>{book.gender}</TableCell>
-                                            <TableCell>{book.email}</TableCell>
-                                            <TableCell>{book.phoneNo}</TableCell>
-                                            <TableCell>{book.requiredSeats}</TableCell>
-                                            <TableCell>{book.flightId}</TableCell>
-                                            <TableCell>{book.flights.flightName}</TableCell>
-                                            <TableCell>{book.flights.origin}</TableCell>
-                                            <TableCell>{book.flights.destination}</TableCell>
-                                            <TableCell>{book.flights.departureTime}</TableCell>
-                                            <TableCell>{book.flights.arrivalTime}</TableCell>
-                                            <TableCell align="right">{book.flights.seats}</TableCell>
-                                            <TableCell sx={{ minWidth: 55 }} align="right"><CurrencyRupeeIcon fontSize='inherit' />{book.flights.fare}</TableCell>
-                                            <TableCell align="right">{book.bookedOn}</TableCell>
-                                            <TableCell align="right">{book.updatedOn}</TableCell>
-                                        </TableRow>
+                                            </StyledTableCell>
+                                            <StyledTableCell>{book.firstName}</StyledTableCell>
+                                            <StyledTableCell>{book.lastName}</StyledTableCell>
+                                            <StyledTableCell>{book.gender}</StyledTableCell>
+                                            <StyledTableCell>{book.email}</StyledTableCell>
+                                            <StyledTableCell>{book.phoneNo}</StyledTableCell>
+                                            <StyledTableCell>{book.requiredSeats}</StyledTableCell>
+                                            <StyledTableCell>{book.flightId}</StyledTableCell>
+                                            <StyledTableCell>{book.flights.flightName}</StyledTableCell>
+                                            <StyledTableCell>{book.flights.origin}</StyledTableCell>
+                                            <StyledTableCell>{book.flights.destination}</StyledTableCell>
+                                            <StyledTableCell>{book.flights.departureTime}</StyledTableCell>
+                                            <StyledTableCell>{book.flights.arrivalTime}</StyledTableCell>
+                                            <StyledTableCell align="right">{book.flights.seats}</StyledTableCell>
+                                            <StyledTableCell sx={{ minWidth: 55 }} align="right"><CurrencyRupeeIcon fontSize='inherit' />{book.flights.fare}</StyledTableCell>
+                                            <StyledTableCell align="right">{book.bookedOn}</StyledTableCell>
+                                            <StyledTableCell align="right">{book.updatedOn}</StyledTableCell>
+                                        </StyledTableRow>
                                     ))}
                                 </TableBody>
                             </Table>
