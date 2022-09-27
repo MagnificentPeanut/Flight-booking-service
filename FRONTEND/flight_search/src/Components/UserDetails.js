@@ -8,6 +8,8 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Tooltip from '@mui/material/Tooltip';
 import { blue } from '@mui/material/colors';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
@@ -191,7 +193,7 @@ export default function GetUserDetails() {
                                         <StyledTableCell>Phone No</StyledTableCell>
                                         <StyledTableCell>Email</StyledTableCell>
                                         <StyledTableCell>Password</StyledTableCell>
-                                        <StyledTableCell align="center">Delete User</StyledTableCell>
+                                        <StyledTableCell align="center"></StyledTableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -208,7 +210,16 @@ export default function GetUserDetails() {
                                             <StyledTableCell>{user.email}</StyledTableCell>
                                             <StyledTableCell>{user.userPassword}</StyledTableCell>
                                             <StyledTableCell align="center">
-                                                <Button size='small' variant='contained' color="error" onClick={() => handleDelete(user)}>Delete</Button>
+                                            <Tooltip title={'Delete ' + user.username + ', ID: ' + user.userId} >
+                                                    <IconButton
+                                                        size='small'
+                                                        variant='contained'
+                                                        color="error"
+                                                        onClick={() => handleDelete(user)}
+                                                    >
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </Tooltip>
                                             </StyledTableCell>
                                         </StyledTableRow>
                                     ))}

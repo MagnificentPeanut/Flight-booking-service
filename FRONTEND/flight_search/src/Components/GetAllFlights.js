@@ -9,7 +9,8 @@ import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import { blue } from '@mui/material/colors';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Tooltip from '@mui/material/Tooltip';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -19,7 +20,6 @@ import TableRow from '@mui/material/TableRow';
 
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import CircularProgress from '@mui/material/CircularProgress';
-import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import { Box, Stack, Typography } from '@mui/material';
 
 import Snackbar from '@mui/material/Snackbar';
@@ -27,23 +27,23 @@ import MuiAlert from '@mui/material/Alert';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: blue[800],
-      color: theme.palette.common.white,
+        backgroundColor: blue[800],
+        color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
+        fontSize: 14,
     },
-  }));
-  
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
+        backgroundColor: theme.palette.action.hover,
     },
     // hide last border
     '&:last-child td, &:last-child th': {
-      border: 0,
+        border: 0,
     },
-  }));
+}));
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -177,7 +177,7 @@ export default function GetAllFlights() {
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
                         <TableContainer sx={{ maxHeight: 310, borderRadius: 1 }} >
-                            <Table stickyHeader sx={{ minWidth: 1000 }} aria-label="simple table">
+                            <Table stickyHeader sx={{ minWidth: 850 }} aria-label="simple table">
                                 <TableHead>
                                     <TableRow>
                                         <StyledTableCell>Flight ID</StyledTableCell>
@@ -208,7 +208,16 @@ export default function GetAllFlights() {
                                             <StyledTableCell align="right">{flight.seats}</StyledTableCell>
                                             <StyledTableCell sx={{ minWidth: 55 }} align="right"><CurrencyRupeeIcon fontSize='inherit' />{flight.fare}</StyledTableCell>
                                             <StyledTableCell align="center">
-                                                <Button size='small' variant='contained' color="error" onClick={() => handleDelete(flight)}>Delete</Button>
+                                                <Tooltip title={'Delete ' + flight.flightName + ' flight ' + flight.flightId} >
+                                                    <IconButton
+                                                        size='small'
+                                                        variant='contained'
+                                                        color="error"
+                                                        onClick={() => handleDelete(flight)}
+                                                    >
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </Tooltip>
                                             </StyledTableCell>
                                         </StyledTableRow>
                                     ))}

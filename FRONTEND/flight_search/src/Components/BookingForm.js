@@ -5,7 +5,6 @@ import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
@@ -14,8 +13,6 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import { Box, Link, Typography } from '@mui/material';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
@@ -80,7 +77,10 @@ function BookFlight() {
                         <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
                             <AirplaneTicketIcon fontSize='medium' />
                         </Avatar>
-                        <Typography component='h1' variant='h5' color='black' >Book Flights</Typography>
+                        <Typography component='h1' variant='h5' color='black' >Book Flight</Typography>
+                        <Typography variant='caption'>
+                            {location.state.flight.flightName} flight {location.state.flight.flightId} from {location.state.flight.origin} to {location.state.flight.destination}
+                        </Typography>
                     </Stack>
                     <Stack sx={{ m: 1, width: 'stretch' }} alignItems='center' direction='row' spacing={2}>
                         <TextField
@@ -149,7 +149,7 @@ function BookFlight() {
                                 fullWidth
                                 type='number'
                                 value={inputs.requiredSeats}
-                                inputProps={{ min: 1, max: 4 }}
+                                inputProps={{ min: 1, max: 6 }}
                                 onChange={handleChange('requiredSeats')}
                                 label="required seats"
                             />
