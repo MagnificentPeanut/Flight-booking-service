@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import HomeIcon from '@mui/icons-material/Home';
 
-export default function ButtonAppBar() {
+export default function StaticAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" color='transparent'>
@@ -22,17 +22,17 @@ export default function ButtonAppBar() {
               edge="start"
               color="inherit"
               aria-label="menu"
-              sx={{ mr: 2 }}
+              sx={{ ml: 10, mr: 2 }}
             >
               <HomeIcon />
             </IconButton>
           </Tooltip>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography fontFamily='Poppins' fontWeight={600} variant="h5" component="div" sx={{ flexGrow: 1 }}>
             Generic Airlines
           </Typography>
-          <Button href='/about' color="inherit">About us</Button>
-          <Button href='/register' color="inherit">Sign Up</Button>
-          <Button href='/login' color="inherit">Login</Button>
+          <Button sx={{ fontFamily: 'Poppins' }} size='large' href='/about' color="inherit">About us</Button>
+          <Button sx={{ fontFamily: 'Poppins' }} size='large' href='/register' color="inherit">Sign Up</Button>
+          <Button sx={{ fontFamily: 'Poppins', mr: 10 }} size='large' href='/login' color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
     </Box>

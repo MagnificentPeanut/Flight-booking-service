@@ -7,7 +7,7 @@ export default function About() {
     return (
         <Box sx={{ backgroundColor: 'white', borderRadius: 2, width: '100%', maxWidth: 600 }}>
             <Stack sx={{ m: 2 }}>
-                <Typography align="left" variant="h2" gutterBottom>
+                <Typography color='darkblue' align="left" variant="h2" gutterBottom>
                     About us
                 </Typography>
                 <Typography align="left" variant="body1" gutterBottom>

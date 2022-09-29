@@ -1,14 +1,14 @@
 import React from 'react';
 
 import Webpages from './Components/Webpages';
-import ButtonAppBar from './Components/ButtonAppBar';
+import StaticAppBar from './Components/StaticAppBar';
 import './App.css';
 
 function App() {
   return (
     <div className='App'>
       <div className='topbar'>
-        <ButtonAppBar/>
+        <StaticAppBar/>
       </div>
       <Webpages />
     </div>

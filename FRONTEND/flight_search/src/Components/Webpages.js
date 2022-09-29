@@ -2,7 +2,6 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 import Form from './SearchForm';
-import ButtonAppBar from './ButtonAppBar';
 import Login from './LoginForm.js';
 import Flights from './FlightDetails';
 import Register from './RegistrationForm';
@@ -16,7 +15,6 @@ const Webpages = () => {
         <Router>
             <Routes>
                 <Route path="/" element= {<Form />} />
-                <Route path="/appbar" element= {<ButtonAppBar />} />
                 <Route path='/login' element = {<Login />} />
                 <Route path='/flights' element = {<Flights />} />
                 <Route path='/register' element = {<Register />} />
