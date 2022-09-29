@@ -75,7 +75,7 @@ export default function RecipeReviewCard() {
         }
         console.log(userObject);
 
-        axios.post('http://localhost:8081/flights/create', userObject)
+        axios.post('http://localhost:8084/flights/create', userObject)
             .then((res) => {
                 console.log(res.data)
                 setOpen(true);

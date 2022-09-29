@@ -18,6 +18,11 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -47,6 +52,8 @@ function BookFlight() {
         setInputs({ ...inputs, [prop]: event.target.value });
     };
 
+    const [bookingId, setBookingId] = useState([]);
+
     const handleSubmit = event => {
         const userObject = {
             firstName: inputs.firstName,
@@ -59,9 +66,10 @@ function BookFlight() {
         }
         console.log(userObject);
 
-        axios.post('http://localhost:8082/booking/book', userObject)
+        axios.post('http://localhost:8084/booking/book', userObject)
             .then((res) => {
                 console.log(res.data)
+                setBookingId(res.data.bookingId)
                 setOpen(true);
             }).catch((error) => {
                 console.log(error)
@@ -159,11 +167,34 @@ function BookFlight() {
                     <Stack direction='row' spacing={1}>
                         <Link href='/' variant='caption'>Go back</Link>
                     </Stack>
-                    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                            Flight booked successfully!
-                        </Alert>
-                    </Snackbar>
+                    <Dialog
+                        open={open}
+                        onClose={handleClose}
+                        maxWidth
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                    >
+                        <DialogTitle align='center' id="alert-dialog-title" color='green' variant='h5' gutterBottom>
+                            {"Booking Confirmed!"}
+                        </DialogTitle>
+                        <DialogContent>
+                            <DialogContentText id="alert-dialog-description" color='black'>
+                                Your booking for {location.state.flight.flightName} flight {location.state.flight.flightId} from {location.state.flight.origin} to {location.state.flight.destination} has been
+                                confirmed with Booking ID: {bookingId}.
+                            </DialogContentText>
+                            <DialogContentText id="alert-dialog-description" color='black' gutterBottom>
+                                Please note down the bookingId for future use.
+                            </DialogContentText>
+                            <DialogContentText id="alert-dialog-description">
+                                Thank you for using Generic Airlines!
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleClose} autoFocus>
+                                Close
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                 </Stack>
             </form>
         </Box>

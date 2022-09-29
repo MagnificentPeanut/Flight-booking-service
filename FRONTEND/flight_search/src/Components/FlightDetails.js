@@ -45,7 +45,7 @@ const Flights = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [flights, setFlights] = useState([]);
 
-    const url = "http://localhost:8081/flights/getByFromTo"
+    const url = "http://localhost:8084/flights/getByFromTo"
 
     const params = {
         origin: location.state.origin,

@@ -75,9 +75,9 @@ export default function GetAllFlights() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [flights, setFlights] = useState([]);
 
-    const url = "http://localhost:8081/flights/getAll"
+    const url = "http://localhost:8084/flights/getAll"
 
-    const deleteUrl = "http://localhost:8081/flights/delete/"
+    const deleteUrl = "http://localhost:8084/flights/delete/"
 
     const [expanded, setExpanded] = React.useState(false);
 

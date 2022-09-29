@@ -19,7 +19,6 @@ import TableRow from '@mui/material/TableRow';
 
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import CircularProgress from '@mui/material/CircularProgress';
-import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import { Box, Stack, Typography } from '@mui/material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -58,7 +57,7 @@ export default function GetBookingDetails() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [booking, setBooking] = useState([]);
 
-    const url = "http://localhost:8082/booking/getAll"
+    const url = "http://localhost:8084/booking/getAll"
 
     const [expanded, setExpanded] = React.useState(false);
 
